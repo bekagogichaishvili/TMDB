@@ -1,10 +1,13 @@
 package ge.gogichaishvili.tmdb.main.presentation.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -38,6 +41,7 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
         return _binding?.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,7 +67,7 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
 
             lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                    mViewModel.getMovies (null).collectLatest {
+                    mViewModel.getMovies (binding.etSearch.text.toString().trim()).collectLatest {
                         moviesAdapter.submitData(it)
                     }
                 }
@@ -90,6 +94,32 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
 
         }
 
+        binding.etSearch.doAfterTextChanged {
+            performSearch(binding.etSearch.text.toString().trim())
+        }
+
+
+        binding.etSearch.setOnTouchListener(View.OnTouchListener { _, event ->
+            val right  = 2
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= binding.etSearch.right - binding.etSearch.compoundDrawables[right].bounds.width()
+                ) {
+                    binding.etSearch.text!!.clear()
+                    return@OnTouchListener true
+                }
+            }
+            false
+        })
+
+    }
+
+    private fun performSearch(search: String?) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            mViewModel.getMovies (search).collectLatest {
+                moviesAdapter.clear()
+                moviesAdapter.submitData(it)
+            }
+        }
     }
 
     override fun onDestroyView() {

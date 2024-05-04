@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">TMDB</string>
     <string name="not_found">არ არის ნაპოვნი</string>
+    <string name="search">ძებნა</string>
 </resources>

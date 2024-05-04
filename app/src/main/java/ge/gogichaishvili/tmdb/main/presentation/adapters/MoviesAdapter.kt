@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -63,6 +64,12 @@ class MoviesAdapter() :
 
     fun setOnItemClickListener(listener: (Movie) -> Unit) {
         onItemClickListener = listener
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    suspend fun clear() {
+        submitData(PagingData.empty())
+        notifyDataSetChanged()
     }
 
     companion object {
