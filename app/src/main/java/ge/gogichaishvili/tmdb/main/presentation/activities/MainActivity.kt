@@ -1,12 +1,18 @@
-package ge.gogichaishvili.tmdb
+package ge.gogichaishvili.tmdb.main.presentation.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ge.gogichaishvili.tmdb.R
+import ge.gogichaishvili.tmdb.main.presentation.activities.base.BaseActivity
+import ge.gogichaishvili.tmdb.main.presentation.viewmodels.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity  : BaseActivity() {
+
+    private val viewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
