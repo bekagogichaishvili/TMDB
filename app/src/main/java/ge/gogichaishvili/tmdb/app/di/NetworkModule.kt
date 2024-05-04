@@ -2,6 +2,7 @@ package ge.gogichaishvili.tmdb.app.di
 
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.app.network.RequestInterceptor
+import ge.gogichaishvili.tmdb.main.data.network.services.MovieServiceApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -20,6 +21,10 @@ object NetworkModule {
         single { provideRetrofit(client = get(), baseUrl = ApiEndpoints.BASE_URL) }
 
         single { provideOkHttpClient(requestInterceptor = get()) }
+
+        single {
+            get<Retrofit>().create(MovieServiceApi::class.java)
+        }
 
     }
 

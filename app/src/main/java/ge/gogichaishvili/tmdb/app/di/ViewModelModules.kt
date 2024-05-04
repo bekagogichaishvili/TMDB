@@ -10,7 +10,7 @@ object ViewModelModules {
     val modules = module {
 
         viewModel {
-            MainViewModel()
+            MainViewModel(repository = get())
         }
 
         viewModel {
@@ -20,6 +20,7 @@ object ViewModelModules {
         viewModel {
             FavoritesViewModel()
         }
+
     }
 }
 
