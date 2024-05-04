@@ -11,12 +11,22 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
+
+    versionCatalogs {
+        create("testLibs") {
+            from(files("gradle/libs.versions.toml"))
+        }
+    }
+
 }
 
 rootProject.name = "TMDB"
