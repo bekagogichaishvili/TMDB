@@ -10,7 +10,7 @@ object ViewModelModules {
     val modules = module {
 
         viewModel {
-            MainViewModel(repository = get())
+            MainViewModel(getPopularMoviesUseCase = get(), searchMoviesUseCase = get())
         }
 
         viewModel {

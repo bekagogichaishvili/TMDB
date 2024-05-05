@@ -41,81 +41,82 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
         return _binding?.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mViewModel.getMovies(null)
 
+        setupRecyclerView()
+        setupSearch()
+
+        observeMovies()
+        handleLoadStates()
+    }
+
+    private fun setupRecyclerView() {
         moviesAdapter = MoviesAdapter().apply {
             setOnItemClickListener {
 
             }
         }
-
-        binding.apply {
-
-            rvItemsRecycler.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                val decoration =
-                    DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-                addItemDecoration(decoration)
-                adapter = moviesAdapter.withLoadStateHeaderAndFooter(
-                    header = LoaderStateAdapter(),
-                    footer = LoaderStateAdapter()
-                )
-
-            }
-
-            lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                    mViewModel.getMovies (binding.etSearch.text.toString().trim()).collectLatest {
-                        moviesAdapter.submitData(it)
-                    }
-                }
-            }
-
-            moviesAdapter.addLoadStateListener { state ->
-                val refreshState = state.refresh
-                rvItemsRecycler.isVisible = state.refresh != LoadState.Loading
-                progress.isVisible = state.refresh == LoadState.Loading
-                if (refreshState is LoadState.NotLoading && moviesAdapter.itemCount == 0) {
-                    Snackbar.make(
-                        binding.root,
-                        R.string.not_found,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                } else if (refreshState is LoadState.Error) {
-                    Snackbar.make(
-                        binding.root,
-                        refreshState.error.localizedMessage ?: "",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            }
-
+        binding.rvItemsRecycler.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = moviesAdapter.withLoadStateHeaderAndFooter(
+                header = LoaderStateAdapter(),
+                footer = LoaderStateAdapter()
+            )
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+    }
 
-        binding.etSearch.doAfterTextChanged {
-            performSearch(binding.etSearch.text.toString().trim())
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupSearch() {
+        binding.etSearch.apply {
+            doAfterTextChanged { text ->
+                performSearch(text.toString().trim())
+            }
+            setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_UP && event.rawX >= right - compoundDrawables[2].bounds.width()) {
+                    text?.clear()
+                    true
+                } else false
+            }
         }
+    }
 
-
-        binding.etSearch.setOnTouchListener(View.OnTouchListener { _, event ->
-            val right  = 2
-            if (event.action == MotionEvent.ACTION_UP) {
-                if (event.rawX >= binding.etSearch.right - binding.etSearch.compoundDrawables[right].bounds.width()
-                ) {
-                    binding.etSearch.text!!.clear()
-                    return@OnTouchListener true
+    private fun observeMovies() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.getMovies(binding.etSearch.text.toString().trim()).collectLatest {
+                    moviesAdapter.submitData(it)
                 }
             }
-            false
-        })
+        }
+    }
 
+    private fun handleLoadStates() {
+        moviesAdapter.addLoadStateListener { state ->
+            val refreshState = state.refresh
+            binding.rvItemsRecycler.isVisible = state.refresh != LoadState.Loading
+            binding.progress.isVisible = state.refresh == LoadState.Loading
+            if (refreshState is LoadState.NotLoading && moviesAdapter.itemCount == 0) {
+                Snackbar.make(
+                    binding.root,
+                    R.string.not_found,
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else if (refreshState is LoadState.Error) {
+                Snackbar.make(
+                    binding.root,
+                    refreshState.error.localizedMessage ?: "",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun performSearch(search: String?) {
         viewLifecycleOwner.lifecycleScope.launch {
-            mViewModel.getMovies (search).collectLatest {
+            mViewModel.getMovies(search).collectLatest {
                 moviesAdapter.clear()
                 moviesAdapter.submitData(it)
             }
@@ -126,4 +127,5 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
         super.onDestroyView()
         _binding = null
     }
+
 }

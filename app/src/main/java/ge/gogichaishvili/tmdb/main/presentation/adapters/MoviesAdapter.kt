@@ -11,79 +11,68 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.databinding.LayoutMovieItemBinding
-import ge.gogichaishvili.tmdb.main.data.network.dto.Movie
+import ge.gogichaishvili.tmdb.main.domain.models.MovieUiModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class MoviesAdapter() :
-    PagingDataAdapter<Movie, MoviesAdapter.ViewHolder>(
-        differCallback
-    ) {
+class MoviesAdapter() : PagingDataAdapter<MovieUiModel, MoviesAdapter.ViewHolder>(differCallback) {
 
-    private lateinit var binding: LayoutMovieItemBinding
-    private lateinit var context: Context
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MoviesAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        binding = LayoutMovieItemBinding.inflate(inflater, parent, false)
-        context = parent.context
-        return ViewHolder()
+        val binding = LayoutMovieItemBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         holder.setIsRecyclable(false)
         holder.bind(getItem(position)!!)
-        holder.setIsRecyclable(false)
-
     }
 
-    inner class ViewHolder : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(
+        private val binding: LayoutMovieItemBinding,
+        private val context: Context
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n")
-        fun bind(item: Movie) {
-            binding.apply {
+        fun bind(item: MovieUiModel) {
+            binding.tvMovieName.text = item.title
+            Glide.with(context)
+                .load(ApiEndpoints.IMAGE_PATH + item.posterPath)
+                .into(binding.ivPoster)
 
-                tvMovieName.text = item.title
-
-                Glide.with(binding.ivPoster.context)
-                    .load(ApiEndpoints.IMAGE_PATH + item.posterPath)
-                    .into(binding.ivPoster)
-
-                root.setOnClickListener {
-                    onItemClickListener?.let {
-                        it(item)
-                    }
+            binding.root.setOnClickListener {
+                onItemClickListener?.let { click ->
+                    click(item)
                 }
             }
         }
     }
 
-    private var onItemClickListener: ((Movie) -> Unit)? = null
+    private var onItemClickListener: ((MovieUiModel) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Movie) -> Unit) {
+    fun setOnItemClickListener(listener: (MovieUiModel) -> Unit) {
         onItemClickListener = listener
     }
 
     @SuppressLint("NotifyDataSetChanged")
     suspend fun clear() {
-        submitData(PagingData.empty())
-        notifyDataSetChanged()
+        withContext(Dispatchers.Main) {
+            submitData(PagingData.empty())
+            notifyDataSetChanged()
+        }
     }
 
     companion object {
-        val differCallback = object : DiffUtil.ItemCallback<Movie>() {
+        val differCallback = object : DiffUtil.ItemCallback<MovieUiModel>() {
             override fun areItemsTheSame(
-                oldItem: Movie,
-                newItem: Movie
+                oldItem: MovieUiModel,
+                newItem: MovieUiModel
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: Movie,
-                newItem: Movie
+                oldItem: MovieUiModel,
+                newItem: MovieUiModel
             ): Boolean {
                 return oldItem.title == newItem.title && oldItem.id == newItem.id
             }

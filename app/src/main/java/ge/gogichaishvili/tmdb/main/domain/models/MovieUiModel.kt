@@ -1,9 +1,9 @@
-package ge.gogichaishvili.tmdb.main.data.network.dto
+package ge.gogichaishvili.tmdb.main.domain.models
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Movie(
+data class MovieUiModel(
     val id: Int,
     val title: String?,
     @SerializedName("poster_path")
