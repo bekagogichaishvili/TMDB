@@ -9,6 +9,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.databinding.LayoutMovieItemBinding
 import ge.gogichaishvili.tmdb.main.domain.models.MovieUiModel
@@ -40,6 +41,8 @@ class MoviesAdapter() : PagingDataAdapter<MovieUiModel, MoviesAdapter.ViewHolder
 
             Glide.with(context)
                 .load(ApiEndpoints.IMAGE_PATH + item.posterPath)
+                .error(R.drawable.no_poster)
+                .centerCrop()
                 .into(binding.ivPoster)
 
             binding.root.setOnClickListener {
