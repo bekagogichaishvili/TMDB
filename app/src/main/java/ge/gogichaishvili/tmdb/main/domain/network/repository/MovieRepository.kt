@@ -1,7 +1,7 @@
-package ge.gogichaishvili.tmdb.main.domain.repository
+package ge.gogichaishvili.tmdb.main.domain.network.repository
 
 import ge.gogichaishvili.tmdb.app.network.Resource
-import ge.gogichaishvili.tmdb.main.domain.models.MovieResponseUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieResponseUiModel
 
 interface MovieRepository {
     suspend fun getPopularMoviesRequest(page: Int): Resource<MovieResponseUiModel>

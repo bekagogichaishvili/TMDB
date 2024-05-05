@@ -1,8 +1,8 @@
-package ge.gogichaishvili.tmdb.main.domain.usecase
+package ge.gogichaishvili.tmdb.main.domain.network.usecase
 
 import ge.gogichaishvili.tmdb.app.network.Resource
-import ge.gogichaishvili.tmdb.main.domain.models.MovieDetailsUiModel
-import ge.gogichaishvili.tmdb.main.domain.repository.MovieDetailsRepository
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieDetailsUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.repository.MovieDetailsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

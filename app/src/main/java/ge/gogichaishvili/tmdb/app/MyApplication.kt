@@ -6,6 +6,7 @@ import ge.gogichaishvili.tmdb.app.di.RepositoryModule
 import ge.gogichaishvili.tmdb.app.di.SessionModule
 import ge.gogichaishvili.tmdb.app.di.UseCaseModule
 import ge.gogichaishvili.tmdb.app.di.ViewModelModules
+import ge.gogichaishvili.tmdb.app.di.RoomModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -25,7 +26,8 @@ class MyApplication : Application() {
                     RepositoryModule.module,
                     UseCaseModule.module,
                     NetworkModule.modules,
-                    SessionModule.module
+                    SessionModule.module,
+                    RoomModule.module
                 )
             )
         }

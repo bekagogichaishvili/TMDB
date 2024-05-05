@@ -6,9 +6,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import ge.gogichaishvili.tmdb.main.data.network.paging.MoviesPagingSource
-import ge.gogichaishvili.tmdb.main.domain.models.MovieUiModel
-import ge.gogichaishvili.tmdb.main.domain.usecase.GetPopularMoviesUseCase
-import ge.gogichaishvili.tmdb.main.domain.usecase.SearchMoviesUseCase
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.usecase.GetPopularMoviesUseCase
+import ge.gogichaishvili.tmdb.main.domain.network.usecase.SearchMoviesUseCase
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 

@@ -1,6 +1,6 @@
 package ge.gogichaishvili.tmdb.main.data.network.dto
 
-import ge.gogichaishvili.tmdb.main.domain.models.MovieResponseUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieResponseUiModel
 
 data class MovieResponseDto(
     val page: Int,

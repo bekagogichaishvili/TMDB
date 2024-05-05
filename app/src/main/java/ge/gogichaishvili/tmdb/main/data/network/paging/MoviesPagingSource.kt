@@ -3,9 +3,9 @@ package ge.gogichaishvili.tmdb.main.data.network.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import ge.gogichaishvili.tmdb.app.network.Resource
-import ge.gogichaishvili.tmdb.main.domain.models.MovieUiModel
-import ge.gogichaishvili.tmdb.main.domain.usecase.GetPopularMoviesUseCase
-import ge.gogichaishvili.tmdb.main.domain.usecase.SearchMoviesUseCase
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.usecase.GetPopularMoviesUseCase
+import ge.gogichaishvili.tmdb.main.domain.network.usecase.SearchMoviesUseCase
 import java.io.IOException
 
 private const val STARTING_PAGE_INDEX = 1

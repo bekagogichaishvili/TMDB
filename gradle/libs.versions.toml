@@ -28,6 +28,8 @@ paging-common-ktx = "3.2.1"
 paging-runtime-ktx = "3.2.1"
 toasty = "1.5.2"
 navVersion = "2.7.7"
+room = "2.6.1"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -73,8 +75,18 @@ toasty = { module = "com.github.GrenderG:Toasty", version.ref = "toasty" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navVersion" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navVersion" }
 
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-guava = { module = "androidx.room:room-guava", version.ref = "room" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 navsafeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navVersion" }
+
+[bundles]
+room = ["room-runtime", "room-compiler", "room-ktx", "room-guava", "room-testing", "room-paging"]
 

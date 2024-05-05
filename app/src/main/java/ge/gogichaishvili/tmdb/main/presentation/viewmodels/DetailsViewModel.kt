@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.app.tools.SingleLiveEvent
-import ge.gogichaishvili.tmdb.main.domain.models.MovieDetailsUiModel
-import ge.gogichaishvili.tmdb.main.domain.usecase.MovieDetailsUseCase
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieDetailsUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.usecase.MovieDetailsUseCase
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

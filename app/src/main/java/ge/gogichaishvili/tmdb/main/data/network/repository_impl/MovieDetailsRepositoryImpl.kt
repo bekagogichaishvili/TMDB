@@ -4,8 +4,8 @@ import ge.gogichaishvili.tmdb.app.constants.Constants
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.app.network.getErrorExceptionMessage
 import ge.gogichaishvili.tmdb.main.data.network.services.MovieDetailsServiceApi
-import ge.gogichaishvili.tmdb.main.domain.models.MovieDetailsUiModel
-import ge.gogichaishvili.tmdb.main.domain.repository.MovieDetailsRepository
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieDetailsUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.repository.MovieDetailsRepository
 import retrofit2.HttpException
 
 class MovieDetailsRepositoryImpl(

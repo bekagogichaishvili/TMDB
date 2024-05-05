@@ -82,7 +82,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
 
                     binding.apply {
                         progressBar.isVisible = false
-
+                        btnFavorite.isVisible = true
                         tvTitle.text = it.data?.originalTitle.toString()
                         tvOverview.text = it.data?.overview.toString()
                         Glide.with(requireContext())
@@ -94,7 +94,11 @@ class DetailsFragment : BottomSheetDialogFragment() {
 
                 }
                 is Resource.Error -> {
-                    binding.progressBar.isVisible = false
+                    binding.apply {
+                        progressBar.isVisible = false
+                        btnFavorite.isVisible = false
+                    }
+
                     Toasty.error(
                         requireContext(), it.message.toString(), Toast.LENGTH_SHORT, true
                     ).show()

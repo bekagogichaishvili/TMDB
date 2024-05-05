@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.databinding.LayoutMovieItemBinding
-import ge.gogichaishvili.tmdb.main.domain.models.MovieUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

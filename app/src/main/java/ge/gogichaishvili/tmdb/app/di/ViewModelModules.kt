@@ -18,7 +18,7 @@ object ViewModelModules {
         }
 
         viewModel {
-            FavoritesViewModel()
+            FavoritesViewModel(getAllMoviesUseCase = get(), deleteMovieUseCase = get(), insertMovieUseCase = get(), )
         }
 
     }

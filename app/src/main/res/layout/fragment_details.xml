@@ -98,6 +98,8 @@
                 android:textSize="16sp"
                 app:backgroundTint="@null"
                 android:clickable="true"
+                android:visibility="invisible"
+                tools:visibility="visible"
                 android:foreground = "?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="@id/endGuideline"
                 app:layout_constraintStart_toStartOf="@id/startGuideline"

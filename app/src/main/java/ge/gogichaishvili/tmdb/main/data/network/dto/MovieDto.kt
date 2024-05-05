@@ -1,7 +1,7 @@
 package ge.gogichaishvili.tmdb.main.data.network.dto
 
 import com.google.gson.annotations.SerializedName
-import ge.gogichaishvili.tmdb.main.domain.models.MovieUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieUiModel
 
 data class MovieDto(
     val id: Int,

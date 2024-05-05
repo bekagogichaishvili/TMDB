@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.utils.addToStdlib.safeAs
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -120,5 +118,12 @@ dependencies {
     //Navigation
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+
+    // Room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation(libs.room.guava)
+    testImplementation(libs.room.testing)
+    implementation(libs.room.paging)
 
 }

@@ -1,7 +1,7 @@
 package ge.gogichaishvili.tmdb.main.data.network.dto
 
 import com.google.gson.annotations.SerializedName
-import ge.gogichaishvili.tmdb.main.domain.models.MovieDetailsUiModel
+import ge.gogichaishvili.tmdb.main.domain.network.models.MovieDetailsUiModel
 
 data class MovieDetailsResponseDto(
     @SerializedName("backdrop_path")

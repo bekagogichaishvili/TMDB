@@ -1,4 +1,4 @@
-package ge.gogichaishvili.tmdb.main.domain.models
+package ge.gogichaishvili.tmdb.main.domain.network.models
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
