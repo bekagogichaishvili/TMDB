@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,8 +57,13 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
     private fun setupRecyclerView() {
         moviesAdapter = MoviesAdapter().apply {
             setOnItemClickListener {
+                //val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(it.id)
+                //findNavController().navigate(action)
 
+                val detailsFragment = DetailsFragment.newInstance(it.id)
+                detailsFragment.show(parentFragmentManager, null)
             }
+
         }
         binding.rvItemsRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())

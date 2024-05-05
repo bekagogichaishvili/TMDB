@@ -6,6 +6,7 @@ object ApiEndpoints {
 
     const val GET_POPULAR_MOVIES = "movie/popular"
     const val SEARCH_MOVIES = "search/movie"
+    const val MOVIE_DETAILS = "movie"
 
     const val IMAGE_PATH = "https://image.tmdb.org/t/p/w500"
 

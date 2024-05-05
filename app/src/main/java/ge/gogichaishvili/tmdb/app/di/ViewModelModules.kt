@@ -14,7 +14,7 @@ object ViewModelModules {
         }
 
         viewModel {
-            DetailsViewModel()
+            DetailsViewModel(movieDetailsUseCase = get())
         }
 
         viewModel {

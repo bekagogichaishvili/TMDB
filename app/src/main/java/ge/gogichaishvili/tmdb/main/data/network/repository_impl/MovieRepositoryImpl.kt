@@ -10,6 +10,7 @@ import retrofit2.Response
 import java.io.IOException
 
 class MovieRepositoryImpl(private val movieServiceApi: MovieServiceApi) : MovieRepository {
+
     override suspend fun getPopularMoviesRequest(page: Int): Resource<MovieResponseUiModel> {
         return makeSafeApiCall { movieServiceApi.getPopularMovies(Constants.API_KEY, page) }
     }
@@ -26,7 +27,7 @@ class MovieRepositoryImpl(private val movieServiceApi: MovieServiceApi) : MovieR
             val response = call()
             if (response.isSuccessful) {
                 response.body()?.toDomainModel()?.let {
-                    return Resource.Success(it)
+                    Resource.Success(it)
                 } ?: Resource.Error("No content found", null)
             } else {
                 Resource.Error(
@@ -41,5 +42,4 @@ class MovieRepositoryImpl(private val movieServiceApi: MovieServiceApi) : MovieR
         }
     }
 }
-
 

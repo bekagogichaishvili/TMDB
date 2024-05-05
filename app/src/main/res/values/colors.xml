@@ -4,7 +4,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="background">#242A32</color>
+    <color name="bottom_sheet_background2">#202020</color>
+    <color name="bottom_sheet_background">#2D3032</color>
     <color name="hint_color">#666666</color>
     <color name="light_gray">#ADADAD</color>
+
+
 
 </resources>

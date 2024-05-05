@@ -1,6 +1,7 @@
 package ge.gogichaishvili.tmdb.app.di
 
 import ge.gogichaishvili.tmdb.main.domain.usecase.GetPopularMoviesUseCase
+import ge.gogichaishvili.tmdb.main.domain.usecase.MovieDetailsUseCase
 import ge.gogichaishvili.tmdb.main.domain.usecase.SearchMoviesUseCase
 import org.koin.dsl.module
 
@@ -11,6 +12,8 @@ object UseCaseModule {
         factory { GetPopularMoviesUseCase(repository = get()) }
 
         factory { SearchMoviesUseCase(repository = get()) }
+
+        factory { MovieDetailsUseCase(movieDetailsRepository = get()) }
 
     }
 }
