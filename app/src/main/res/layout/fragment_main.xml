@@ -18,6 +18,7 @@
         android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:imeOptions="actionDone"
         android:padding="15dp"
         android:layout_margin="15dp"
         android:textColorHint="@color/hint_color"

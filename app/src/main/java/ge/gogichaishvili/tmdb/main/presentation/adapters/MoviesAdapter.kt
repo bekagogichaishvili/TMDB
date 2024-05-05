@@ -35,6 +35,9 @@ class MoviesAdapter() : PagingDataAdapter<MovieUiModel, MoviesAdapter.ViewHolder
 
         fun bind(item: MovieUiModel) {
             binding.tvMovieName.text = item.title
+            binding.tvMovieReleaseDate.text = item.releaseDate
+            binding.tvMovieDescription.text = item.overview
+
             Glide.with(context)
                 .load(ApiEndpoints.IMAGE_PATH + item.posterPath)
                 .into(binding.ivPoster)

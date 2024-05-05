@@ -18,17 +18,47 @@
         app:strokeColor="#202633"
         app:strokeWidth="0.1dp" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvMovieName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/bpg"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_poster"
         app:layout_constraintTop_toTopOf="@id/iv_poster"
         tools:text="Film name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvMovieReleaseDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/bpg"
+        android:textColor="@color/light_gray"
+        android:textStyle="italic"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieName" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvMovieDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/bpg"
+        android:textColor="@color/white"
+        android:lines="4"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieReleaseDate"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
