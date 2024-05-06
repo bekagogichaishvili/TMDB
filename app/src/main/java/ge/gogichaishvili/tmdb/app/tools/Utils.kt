@@ -2,7 +2,9 @@ package ge.gogichaishvili.tmdb.app.tools
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.util.Base64
+import android.widget.ImageView
 import java.io.ByteArrayOutputStream
 
 object Utils {
@@ -42,6 +44,19 @@ object Utils {
 
     fun byteArrayToBitmap(byteArray: ByteArray): Bitmap {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    }
+
+    fun byteArrayFromImageView(imageView: ImageView): ByteArray? {
+        val drawable = imageView.drawable
+        if (drawable is BitmapDrawable) {
+            val bitmap = drawable.bitmap
+            val stream = ByteArrayOutputStream()
+            stream.use {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+                return it.toByteArray()
+            }
+        }
+        return null
     }
 
 }

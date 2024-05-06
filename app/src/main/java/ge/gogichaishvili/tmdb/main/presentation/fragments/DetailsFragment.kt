@@ -1,7 +1,6 @@
 package ge.gogichaishvili.tmdb.main.presentation.fragments
 
 import android.app.Dialog
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import es.dmoral.toasty.Toasty
 import ge.gogichaishvili.tmdb.R
-import ge.gogichaishvili.tmdb.app.constants.Constants
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.databinding.FragmentDetailsBinding
@@ -25,7 +23,6 @@ import ge.gogichaishvili.tmdb.main.presentation.viewmodels.DetailsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 import java.net.URL
@@ -80,13 +77,13 @@ class DetailsFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnFavorite.setOnClickListener {
-            showLoading()
-            fetchMovieData ()
+            fetchAndSaveMovieData()
         }
     }
 
 
-    private fun fetchMovieData() {
+    private fun fetchAndSaveMovieData() {
+        showLoading(true)
         mViewModel.requestStateLiveData.value?.data?.let { currentMovie ->
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -100,7 +97,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
                         image = imageData
                     )
 
-                    insertMovieToDatabase(movieToFavorite)
+                    mViewModel.insertMovie(movieToFavorite)
 
                 } catch (e: IOException) {
                     showErrorToast("Failed to fetch image data. Please try again.")
@@ -109,18 +106,12 @@ class DetailsFragment : BottomSheetDialogFragment() {
                     showErrorToast("An unexpected error occurred. Please try again later.")
                     e.printStackTrace()
                 } finally {
-                    hideLoading()
+                    showLoading(false)
                 }
             }
         } ?: run {
             Toast.makeText(requireContext(), "No movie data available", Toast.LENGTH_SHORT).show()
-            hideLoading()
-        }
-    }
-
-    private suspend fun insertMovieToDatabase(movie: FavoriteMovieModel) {
-        withContext(Dispatchers.IO) {
-            mViewModel.insertMovie(movie)
+            showLoading(false)
         }
     }
 
@@ -130,12 +121,10 @@ class DetailsFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun showLoading() {
-        // Show loading indicator
-    }
-
-    private fun hideLoading() {
-        // Hide loading indicator
+    private fun showLoading(show: Boolean) {
+        CoroutineScope(Dispatchers.Main).launch {
+            binding.pbBtn.isVisible = show
+        }
     }
 
     private fun observe() {

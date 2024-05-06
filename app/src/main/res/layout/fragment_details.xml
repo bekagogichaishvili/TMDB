@@ -86,47 +86,61 @@
                 app:strokeColor="#202633"
                 app:strokeWidth="0.1dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_favorite"
+
+            <FrameLayout
+                android:id="@+id/fl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/button_bg"
-                android:text="@string/add_to_favorite"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:backgroundTint="@null"
-                android:clickable="true"
-                android:visibility="invisible"
-                tools:visibility="visible"
-                android:foreground = "?attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="@id/endGuideline"
                 app:layout_constraintStart_toStartOf="@id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_poster">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_bg"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/add_to_favorite"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:visibility="invisible"
+                    app:backgroundTint="@null"
+                    tools:visibility="visible" />
+
+                <ProgressBar
+                    android:id="@+id/pb_btn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:elevation="2dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:indeterminateTint="#FFFFFF"
+                    android:translationZ="2dp"
+                    android:visibility="invisible" />
+            </FrameLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_overview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:fontFamily="@font/bpg"
                 android:justificationMode="inter_word"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:layout_marginBottom="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/endGuideline"
                 app:layout_constraintStart_toStartOf="@+id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@+id/btn_favorite" />
-
-            <ImageView
-                android:id="@+id/test"
-                android:layout_width="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_overview"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toBottomOf="@+id/fl" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
