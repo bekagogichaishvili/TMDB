@@ -11,6 +11,11 @@ const val DATABASE_VERSION = 1
 
 @Database(entities = [FavoriteMovieModel::class], version = DATABASE_VERSION, exportSchema = false)
 abstract class FavoriteMovieDatabase : RoomDatabase() {
+    abstract fun favoriteMovieDao(): FavoriteMovieDao
+}
+
+/*@Database(entities = [FavoriteMovieModel::class], version = DATABASE_VERSION, exportSchema = false)
+abstract class FavoriteMovieDatabase : RoomDatabase() {
 
     abstract fun favoriteMovieDao(): FavoriteMovieDao
 
@@ -36,4 +41,4 @@ abstract class FavoriteMovieDatabase : RoomDatabase() {
             }
         }
     }
-}
+}*/

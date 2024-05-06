@@ -4,4 +4,6 @@
     <string name="not_found">არ არის ნაპოვნი</string>
     <string name="search">ძებნა</string>
     <string name="add_to_favorite">Რჩეულებში დამატება</string>
+    <string name="movie_added">ფილმი წარმატებით დაემატა</string>
+    <string name="error">დაფიქსირდა შეცდომა</string>
 </resources>

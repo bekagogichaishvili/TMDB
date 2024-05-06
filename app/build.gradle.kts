@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.navsafeargs)
-    kotlin("kapt")
+    id("org.jetbrains.kotlin.kapt")
+    //kotlin("kapt")
 }
 
 android {
@@ -40,6 +41,7 @@ android {
         viewBinding = true
     }
 }
+
 
 dependencies {
 
@@ -122,6 +124,7 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
     implementation(libs.room.guava)
     testImplementation(libs.room.testing)
     implementation(libs.room.paging)

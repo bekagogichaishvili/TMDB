@@ -18,6 +18,7 @@ import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.databinding.FragmentDetailsBinding
+import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.DetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -69,6 +70,24 @@ class DetailsFragment : BottomSheetDialogFragment() {
         binding.btnClose.setOnClickListener {
             dismiss()
         }
+
+        binding.btnFavorite.setOnClickListener {
+
+            val currentMovie = mViewModel.requestStateLiveData.value?.data
+            if (currentMovie != null) {
+                val movieToFavorite = FavoriteMovieModel(
+                    id = currentMovie.id ?: 0,
+                    title = currentMovie.originalTitle ?: "Unknown Title",
+                    overview = currentMovie.overview ?: "No description available.",
+                    image = currentMovie.backdropPath ?: "No poster"
+                )
+                mViewModel.insertMovie(movieToFavorite)
+            } else {
+                Toast.makeText(requireContext(), "No movie data available", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        }
     }
 
     private fun observe() {
@@ -78,6 +97,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
                 is Resource.Loading -> {
                     binding.progressBar.isVisible = true
                 }
+
                 is Resource.Success -> {
 
                     binding.apply {
@@ -93,6 +113,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
                     }
 
                 }
+
                 is Resource.Error -> {
                     binding.apply {
                         progressBar.isVisible = false
@@ -105,6 +126,18 @@ class DetailsFragment : BottomSheetDialogFragment() {
                 }
             }
         }
+
+        mViewModel.statusMessage.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                Toasty.success(
+                    requireContext(), R.string.movie_added, Toast.LENGTH_SHORT, true
+                ).show()
+            } else {
+                Toasty.error(requireContext(), R.string.error, Toast.LENGTH_SHORT, true)
+                    .show()
+            }
+        }
+
     }
 
     companion object {

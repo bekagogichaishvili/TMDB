@@ -8,9 +8,15 @@ import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 class FavoriteMovieRepositoryImpl(private val favoriteMovieDao: FavoriteMovieDao) :
     FavoriteMovieRepository {
 
-    override suspend fun insertMovie(model: FavoriteMovieModel) {
-        favoriteMovieDao.insert(model)
+    override suspend fun insertMovie(movie: FavoriteMovieModel): Boolean {
+        return try {
+            val result = favoriteMovieDao.insertMovie(movie)
+            result > 0
+        } catch (e: Exception) {
+            false
+        }
     }
+
 
     override suspend fun deleteMovie(model: FavoriteMovieModel) {
         favoriteMovieDao.delete(model)

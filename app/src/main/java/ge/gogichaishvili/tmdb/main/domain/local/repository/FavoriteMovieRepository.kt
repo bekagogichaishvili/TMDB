@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 
 interface FavoriteMovieRepository {
-    suspend fun insertMovie(model: FavoriteMovieModel)
+    suspend fun insertMovie(movie: FavoriteMovieModel):Boolean
     suspend fun deleteMovie(model: FavoriteMovieModel)
     fun getAllMovies(): LiveData<List<FavoriteMovieModel>>
 }

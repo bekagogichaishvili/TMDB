@@ -14,11 +14,11 @@ object ViewModelModules {
         }
 
         viewModel {
-            DetailsViewModel(movieDetailsUseCase = get())
+            DetailsViewModel(movieDetailsUseCase = get(), insertMovieUseCase = get())
         }
 
         viewModel {
-            FavoritesViewModel(getAllMoviesUseCase = get(), deleteMovieUseCase = get(), insertMovieUseCase = get(), )
+            FavoritesViewModel(getAllMoviesUseCase = get(), deleteMovieUseCase = get() )
         }
 
     }

@@ -1,16 +1,22 @@
 package ge.gogichaishvili.tmdb.main.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.app.tools.SingleLiveEvent
+import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
+import ge.gogichaishvili.tmdb.main.domain.local.usecase.InsertMovieUseCase
 import ge.gogichaishvili.tmdb.main.domain.network.models.MovieDetailsUiModel
 import ge.gogichaishvili.tmdb.main.domain.network.usecase.MovieDetailsUseCase
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val movieDetailsUseCase: MovieDetailsUseCase) : BaseViewModel() {
+class DetailsViewModel(
+    private val movieDetailsUseCase: MovieDetailsUseCase,
+    private val insertMovieUseCase: InsertMovieUseCase
+) : BaseViewModel() {
 
     private val _requestStateLiveData =
         SingleLiveEvent<Resource<MovieDetailsUiModel>>()
@@ -35,4 +41,18 @@ class DetailsViewModel(private val movieDetailsUseCase: MovieDetailsUseCase) : B
         }
     }
 
+    private val _statusMessage = MutableLiveData<Boolean>()
+    val statusMessage: LiveData<Boolean> = _statusMessage
+
+    fun insertMovie(movie: FavoriteMovieModel) {
+        viewModelScope.launch {
+            val success = insertMovieUseCase.execute(movie)
+            _statusMessage.value = success
+        }
+    }
+
 }
+
+
+
+

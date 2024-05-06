@@ -20,7 +20,10 @@ object RepositoryModule {
             MovieDetailsRepositoryImpl (movieDetailsServiceApi = get()) as MovieDetailsRepository
         }
 
-        single<FavoriteMovieRepository> { FavoriteMovieRepositoryImpl(favoriteMovieDao = get()) }
+        single {
+            FavoriteMovieRepositoryImpl (favoriteMovieDao = get()) as FavoriteMovieRepository
+        }
+
 
     }
 

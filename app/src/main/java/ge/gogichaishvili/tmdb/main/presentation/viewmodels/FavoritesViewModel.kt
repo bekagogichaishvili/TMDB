@@ -10,18 +10,11 @@ import ge.gogichaishvili.tmdb.main.presentation.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class FavoritesViewModel(
-    private val insertMovieUseCase: InsertMovieUseCase,
     private val deleteMovieUseCase: DeleteMovieUseCase,
     private val getAllMoviesUseCase: GetAllMoviesUseCase
 ) : BaseViewModel() {
 
     val allMovies: LiveData<List<FavoriteMovieModel>> = getAllMoviesUseCase.execute()
-
-    fun insertMovie(movie: FavoriteMovieModel) {
-        viewModelScope.launch {
-            insertMovieUseCase.execute(movie)
-        }
-    }
 
     fun deleteMovie(movie: FavoriteMovieModel) {
         viewModelScope.launch {

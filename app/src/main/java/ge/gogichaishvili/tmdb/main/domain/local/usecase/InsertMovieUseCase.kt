@@ -6,9 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class InsertMovieUseCase(private val repository: FavoriteMovieRepository) {
-    suspend fun execute(movie: FavoriteMovieModel) {
-        withContext(Dispatchers.IO) {
-            repository.insertMovie(movie)
-        }
+    suspend fun execute(movie: FavoriteMovieModel): Boolean = withContext(Dispatchers.IO) {
+        repository.insertMovie(movie)
     }
 }
