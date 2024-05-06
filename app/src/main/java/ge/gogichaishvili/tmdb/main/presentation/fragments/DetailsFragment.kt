@@ -1,6 +1,7 @@
 package ge.gogichaishvili.tmdb.main.presentation.fragments
 
 import android.app.Dialog
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +16,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import es.dmoral.toasty.Toasty
 import ge.gogichaishvili.tmdb.R
+import ge.gogichaishvili.tmdb.app.constants.Constants
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.databinding.FragmentDetailsBinding
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.DetailsViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.IOException
+import java.net.URL
 
 class DetailsFragment : BottomSheetDialogFragment() {
 
@@ -72,22 +80,62 @@ class DetailsFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnFavorite.setOnClickListener {
-
-            val currentMovie = mViewModel.requestStateLiveData.value?.data
-            if (currentMovie != null) {
-                val movieToFavorite = FavoriteMovieModel(
-                    id = currentMovie.id ?: 0,
-                    title = currentMovie.originalTitle ?: "Unknown Title",
-                    overview = currentMovie.overview ?: "No description available.",
-                    image = currentMovie.backdropPath ?: "No poster"
-                )
-                mViewModel.insertMovie(movieToFavorite)
-            } else {
-                Toast.makeText(requireContext(), "No movie data available", Toast.LENGTH_SHORT)
-                    .show()
-            }
-
+            showLoading()
+            fetchMovieData ()
         }
+    }
+
+
+    private fun fetchMovieData() {
+        mViewModel.requestStateLiveData.value?.data?.let { currentMovie ->
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val imageUrl = URL(ApiEndpoints.IMAGE_PATH + currentMovie.backdropPath)
+                    val imageData = imageUrl.readBytes()
+
+                    val movieToFavorite = FavoriteMovieModel(
+                        id = currentMovie.id ?: 0,
+                        title = currentMovie.originalTitle ?: "Unknown Title",
+                        overview = currentMovie.overview ?: "No description available.",
+                        image = imageData
+                    )
+
+                    insertMovieToDatabase(movieToFavorite)
+
+                } catch (e: IOException) {
+                    showErrorToast("Failed to fetch image data. Please try again.")
+                    e.printStackTrace()
+                } catch (e: Exception) {
+                    showErrorToast("An unexpected error occurred. Please try again later.")
+                    e.printStackTrace()
+                } finally {
+                    hideLoading()
+                }
+            }
+        } ?: run {
+            Toast.makeText(requireContext(), "No movie data available", Toast.LENGTH_SHORT).show()
+            hideLoading()
+        }
+    }
+
+    private suspend fun insertMovieToDatabase(movie: FavoriteMovieModel) {
+        withContext(Dispatchers.IO) {
+            mViewModel.insertMovie(movie)
+        }
+    }
+
+    private fun showErrorToast(message: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showLoading() {
+        // Show loading indicator
+    }
+
+    private fun hideLoading() {
+        // Hide loading indicator
     }
 
     private fun observe() {

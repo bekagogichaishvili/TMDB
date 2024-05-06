@@ -24,7 +24,6 @@ object RepositoryModule {
             FavoriteMovieRepositoryImpl (favoriteMovieDao = get()) as FavoriteMovieRepository
         }
 
-
     }
 
 }
