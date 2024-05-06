@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -80,7 +81,6 @@ class DetailsFragment : BottomSheetDialogFragment() {
             fetchAndSaveMovieData()
         }
     }
-
 
     private fun fetchAndSaveMovieData() {
         showLoading(true)
@@ -173,6 +173,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
                 Toasty.error(requireContext(), R.string.error, Toast.LENGTH_SHORT, true)
                     .show()
             }
+
         }
 
     }

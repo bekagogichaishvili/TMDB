@@ -1,11 +1,12 @@
 package ge.gogichaishvili.tmdb.main.domain.local.usecase
 
-import androidx.lifecycle.LiveData
-import ge.gogichaishvili.tmdb.main.domain.local.repository.FavoriteMovieRepository
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
+import ge.gogichaishvili.tmdb.main.domain.local.repository.FavoriteMovieRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class GetAllMoviesUseCase(private val repository: FavoriteMovieRepository) {
-    fun execute(): LiveData<List<FavoriteMovieModel>> {
-        return repository.getAllMovies()
+    suspend fun execute(limit: Int, offset: Int): List<FavoriteMovieModel> = withContext(Dispatchers.IO) {
+        repository.getAllMovies(limit, offset)
     }
 }

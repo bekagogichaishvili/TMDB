@@ -1,9 +1,8 @@
 package ge.gogichaishvili.tmdb.main.data.local.data.repository_impl
 
-import androidx.lifecycle.LiveData
 import ge.gogichaishvili.tmdb.main.data.local.dao.FavoriteMovieDao
-import ge.gogichaishvili.tmdb.main.domain.local.repository.FavoriteMovieRepository
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
+import ge.gogichaishvili.tmdb.main.domain.local.repository.FavoriteMovieRepository
 
 class FavoriteMovieRepositoryImpl(private val favoriteMovieDao: FavoriteMovieDao) :
     FavoriteMovieRepository {
@@ -17,12 +16,12 @@ class FavoriteMovieRepositoryImpl(private val favoriteMovieDao: FavoriteMovieDao
         }
     }
 
-
     override suspend fun deleteMovie(model: FavoriteMovieModel) {
         favoriteMovieDao.delete(model)
     }
 
-    override fun getAllMovies(): LiveData<List<FavoriteMovieModel>> {
-        return favoriteMovieDao.getAllMovies()
+    override suspend fun getAllMovies(limit: Int, offset: Int): List<FavoriteMovieModel> {
+        return favoriteMovieDao.getPagedList(limit, offset)
     }
+
 }

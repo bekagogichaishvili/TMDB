@@ -57,11 +57,11 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
     private fun setupRecyclerView() {
         moviesAdapter = MoviesAdapter().apply {
             setOnItemClickListener {
-                //val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(it.id)
-                //findNavController().navigate(action)
+               // val detailsFragment = DetailsFragment.newInstance(it.id)
+                //detailsFragment.show(parentFragmentManager, null)
 
-                val detailsFragment = DetailsFragment.newInstance(it.id)
-                detailsFragment.show(parentFragmentManager, null)
+                val action = MainFragmentDirections.actionMainFragmentToFavoritesFragment()
+                findNavController().navigate(action)
             }
 
         }
