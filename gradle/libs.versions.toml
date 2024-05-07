@@ -29,6 +29,7 @@ paging-runtime-ktx = "3.2.1"
 toasty = "1.5.2"
 navVersion = "2.7.7"
 room = "2.6.1"
+fragment = "1.7.0"
 
 
 [libraries]
@@ -81,6 +82,7 @@ room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-guava = { module = "androidx.room:room-guava", version.ref = "room" }
 room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

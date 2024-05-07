@@ -20,7 +20,7 @@ class FavoritesViewModel(
     private val getAllMoviesUseCase: GetAllMoviesUseCase
 ) : BaseViewModel() {
 
-    fun getMovies(): Flow<PagingData<FavoriteMovieModel>> {
+    fun getMovies (): Flow<PagingData<FavoriteMovieModel>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20,

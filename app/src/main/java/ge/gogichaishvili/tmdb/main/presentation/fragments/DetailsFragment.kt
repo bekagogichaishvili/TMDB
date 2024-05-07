@@ -169,6 +169,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
                 Toasty.success(
                     requireContext(), R.string.movie_added, Toast.LENGTH_SHORT, true
                 ).show()
+                dismiss()
             } else {
                 Toasty.error(requireContext(), R.string.error, Toast.LENGTH_SHORT, true)
                     .show()

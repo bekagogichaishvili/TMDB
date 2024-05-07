@@ -7,6 +7,11 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.dmoral.toasty.Toasty
 import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.databinding.ActivityMainBinding
@@ -36,6 +41,23 @@ class MainActivity : BaseActivity() {
             true
         }
 
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        setupNavigation(bottomNavigationView)
+
+    }
+
+    private fun setupNavigation(bottomNavigationView: BottomNavigationView) {
+        val navHostFragment = NavHostFragment.create(R.navigation.navigation)
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainerView, navHostFragment)
+            setPrimaryNavigationFragment(navHostFragment)
+            commit()
+        }
+
+        supportFragmentManager.executePendingTransactions()
+
+        val navController = navHostFragment.navController
+        bottomNavigationView.setupWithNavController(navController)
     }
 
     override fun onStart() {
@@ -43,7 +65,8 @@ class MainActivity : BaseActivity() {
         isConnectionLiveData.observe(this, Observer { isConnected ->
             if (!isFirstStart) {
                 if (isConnected) {
-                    Toasty.success(this, R.string.connection_success, Toast.LENGTH_SHORT, true).show()
+                    Toasty.success(this, R.string.connection_success, Toast.LENGTH_SHORT, true)
+                        .show()
                 } else {
                     Toasty.error(this, R.string.connection_loss, Toast.LENGTH_SHORT, true).show()
                 }

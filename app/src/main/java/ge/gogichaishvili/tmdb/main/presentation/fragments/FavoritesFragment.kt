@@ -10,6 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,8 +26,10 @@ import ge.gogichaishvili.tmdb.main.data.network.paging.LoaderStateAdapter
 import ge.gogichaishvili.tmdb.main.presentation.adapters.RoomMoviesAdapter
 import ge.gogichaishvili.tmdb.main.presentation.fragments.base.BaseFragment
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.FavoritesViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FavoritesFragment : BaseFragment<FavoritesViewModel>(FavoritesViewModel::class) {
 
@@ -68,7 +72,10 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>(FavoritesViewModel::c
                 header = LoaderStateAdapter(),
                 footer = LoaderStateAdapter()
             )
-
+            itemAnimator = DefaultItemAnimator().apply {
+                addDuration = 250
+                removeDuration = 250
+            }
         }
     }
 

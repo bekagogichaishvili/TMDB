@@ -9,4 +9,6 @@
     <string name="connection_success">თქვენი ინტერნეტ კავშირი აღდგენილია.</string>
     <string name="connection_loss">თქვენი ინტერნეტ კავშირი გაწყდა.</string>
     <string name="movie_deleted">ფილმი წარმატებით წაიშალა</string>
+    <string name="home">მთავარი</string>
+    <string name="favourite">ფავორიტები</string>
 </resources>
