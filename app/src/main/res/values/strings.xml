@@ -19,4 +19,7 @@
     <string name="guest">Guest</string>
     <string name="eng">ENG</string>
     <string name="geo">GEO</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete_confirm">Are you sure ?</string>
 </resources>

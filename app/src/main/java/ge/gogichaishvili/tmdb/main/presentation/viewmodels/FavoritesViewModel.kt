@@ -7,6 +7,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import ge.gogichaishvili.tmdb.app.tools.SingleLiveEvent
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 import ge.gogichaishvili.tmdb.main.data.local.paging.RoomMoviesPagingSource
 import ge.gogichaishvili.tmdb.main.domain.local.usecase.DeleteMovieUseCase
@@ -33,7 +34,7 @@ class FavoritesViewModel(
     }
 
 
-    private val _statusMessage = MutableLiveData<Boolean>()
+    private val _statusMessage = SingleLiveEvent<Boolean>()
     val statusMessage: LiveData<Boolean> = _statusMessage
 
     fun deleteMovie(id: Long) {

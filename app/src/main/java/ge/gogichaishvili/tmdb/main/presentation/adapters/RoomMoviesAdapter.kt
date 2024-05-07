@@ -58,9 +58,6 @@ class RoomMoviesAdapter :
             binding.ibDelete.setOnClickListener {
                 onDeleteClickListener?.let { click ->
                     click(item)
-                    refresh()
-                    notifyDataSetChanged()
-
                 }
             }
         }

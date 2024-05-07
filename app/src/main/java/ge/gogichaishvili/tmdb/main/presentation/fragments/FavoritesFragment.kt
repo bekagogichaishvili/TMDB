@@ -1,11 +1,13 @@
 package ge.gogichaishvili.tmdb.main.presentation.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -71,7 +73,14 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>(FavoritesViewModel::c
 
             }
             setOnDeleteClickListener {
-                mViewModel.deleteMovie(it.id.toLong())
+
+                val dialog = CustomDialogFragment().apply {
+                    arguments = Bundle().apply {
+                        putLong("id", it.id.toLong())
+                    }
+                }
+                dialog.show(childFragmentManager, "CustomDialogFragment")
+
             }
         }
         binding.rvItemsRecycler.apply {
@@ -118,6 +127,12 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>(FavoritesViewModel::c
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun deleteMovie (id: Long) {
+        mViewModel.deleteMovie(id)
+        roomMoviesAdapter.refresh()
+        roomMoviesAdapter.notifyDataSetChanged()
+    }
 
     override fun bindObservers() {
 

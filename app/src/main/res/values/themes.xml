@@ -33,12 +33,29 @@
         <item name="android:background">@drawable/bottom_dialog_background</item>
     </style>
 
-    <!-- Splashscreen -->
+    <!-- Splashscreen API-->
     <style name="Theme.App.SplashTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/splashscreen_bg</item>
         <item name="windowSplashScreenAnimationDuration">500</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_wrapper</item>
         <item name="postSplashScreenTheme">@style/Theme.TMDB</item>
+    </style>
+
+    <!-- DialogFragment style -->
+    <style name="myDialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+    </style>
+
+    <style name="MyAnimation.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/slide_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_out</item>
     </style>
 
 </resources>

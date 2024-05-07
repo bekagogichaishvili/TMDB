@@ -41,7 +41,7 @@ class DetailsViewModel(
         }
     }
 
-    private val _statusMessage = MutableLiveData<Boolean>()
+    private val _statusMessage = SingleLiveEvent<Boolean>()
     val statusMessage: LiveData<Boolean> = _statusMessage
 
     fun insertMovie(movie: FavoriteMovieModel) {
