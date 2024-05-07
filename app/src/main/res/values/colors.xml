@@ -9,7 +9,7 @@
     <color name="hint_color">#666666</color>
     <color name="light_gray">#ADADAD</color>
     <color name="btn_green">#4FCCA3</color>
-
+    <color name="splashscreen_bg">#051B32</color>
 
 
 </resources>
