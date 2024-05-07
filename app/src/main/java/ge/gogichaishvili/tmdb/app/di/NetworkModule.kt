@@ -2,6 +2,8 @@ package ge.gogichaishvili.tmdb.app.di
 
 import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
 import ge.gogichaishvili.tmdb.app.network.RequestInterceptor
+import ge.gogichaishvili.tmdb.login.data.services.AuthServiceApi
+import ge.gogichaishvili.tmdb.login.data.services.LoginServiceApi
 import ge.gogichaishvili.tmdb.main.data.network.services.MovieDetailsServiceApi
 import ge.gogichaishvili.tmdb.main.data.network.services.MovieServiceApi
 import okhttp3.OkHttpClient
@@ -29,6 +31,14 @@ object NetworkModule {
 
         single {
             get<Retrofit>().create(MovieDetailsServiceApi::class.java)
+        }
+
+        single {
+            get<Retrofit>().create(AuthServiceApi::class.java)
+        }
+
+        single {
+            get<Retrofit>().create(LoginServiceApi::class.java)
         }
 
     }

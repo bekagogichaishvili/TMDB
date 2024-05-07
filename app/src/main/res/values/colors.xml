@@ -10,6 +10,8 @@
     <color name="light_gray">#ADADAD</color>
     <color name="btn_green">#4FCCA3</color>
     <color name="splashscreen_bg">#051B32</color>
+    <color name="btn_gray">#3A3F47</color>
+    <color name="hint">#94969A</color>
 
 
 </resources>

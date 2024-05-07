@@ -1,5 +1,7 @@
 package ge.gogichaishvili.tmdb.app.di
 
+import ge.gogichaishvili.tmdb.login.domain.usecase.AuthUseCase
+import ge.gogichaishvili.tmdb.login.domain.usecase.LoginUseCase
 import ge.gogichaishvili.tmdb.main.domain.local.usecase.DeleteMovieUseCase
 import ge.gogichaishvili.tmdb.main.domain.local.usecase.GetAllMoviesUseCase
 import ge.gogichaishvili.tmdb.main.domain.local.usecase.InsertMovieUseCase
@@ -23,6 +25,10 @@ object UseCaseModule {
         factory { InsertMovieUseCase(repository = get()) }
 
         factory { DeleteMovieUseCase(repository = get()) }
+
+        factory { AuthUseCase(authRepository = get()) }
+
+        factory { LoginUseCase(loginRepository = get()) }
 
     }
 }

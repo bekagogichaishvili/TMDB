@@ -1,5 +1,6 @@
 package ge.gogichaishvili.tmdb.app.di
 
+import ge.gogichaishvili.tmdb.login.presentation.viewmodels.LoginViewModel
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.DetailsViewModel
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.FavoritesViewModel
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.MainViewModel
@@ -20,6 +21,11 @@ object ViewModelModules {
         viewModel {
             FavoritesViewModel(getAllMoviesUseCase = get(), deleteMovieUseCase = get() )
         }
+
+        viewModel {
+            LoginViewModel(authUseCase = get(), loginUseCase = get() )
+        }
+
 
     }
 }

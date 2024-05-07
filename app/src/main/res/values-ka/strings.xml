@@ -11,4 +11,9 @@
     <string name="movie_deleted">ფილმი წარმატებით წაიშალა</string>
     <string name="home">მთავარი</string>
     <string name="favourite">ფავორიტები</string>
+    <string name="login_title">შედით თქვენს ანგარიშზე</string>
+    <string name="username">მომხმარებელი</string>
+    <string name="password">პაროლი</string>
+    <string name="login">შესვლა</string>
+    <string name="all_fields_are_required">ყველა ველის შევსება აუცილებელია</string>
 </resources>

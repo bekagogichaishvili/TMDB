@@ -58,6 +58,13 @@ class MainActivity : BaseActivity() {
 
         val navController = navHostFragment.navController
         bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginFragment -> bottomNavigationView.visibility = View.GONE
+                else -> bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onStart() {

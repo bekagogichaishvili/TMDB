@@ -1,5 +1,9 @@
 package ge.gogichaishvili.tmdb.app.di
 
+import ge.gogichaishvili.tmdb.login.data.repositoryimpl.AuthRepositoryImpl
+import ge.gogichaishvili.tmdb.login.data.repositoryimpl.LoginRepositoryImpl
+import ge.gogichaishvili.tmdb.login.domain.repository.AuthRepository
+import ge.gogichaishvili.tmdb.login.domain.repository.LoginRepository
 import ge.gogichaishvili.tmdb.main.data.local.data.repository_impl.FavoriteMovieRepositoryImpl
 import ge.gogichaishvili.tmdb.main.domain.local.repository.FavoriteMovieRepository
 import ge.gogichaishvili.tmdb.main.data.network.repository_impl.MovieDetailsRepositoryImpl
@@ -22,6 +26,14 @@ object RepositoryModule {
 
         single {
             FavoriteMovieRepositoryImpl (favoriteMovieDao = get()) as FavoriteMovieRepository
+        }
+
+        single {
+            AuthRepositoryImpl (authServiceApi = get()) as AuthRepository
+        }
+
+        single {
+            LoginRepositoryImpl (loginServiceApi = get()) as LoginRepository
         }
 
     }
