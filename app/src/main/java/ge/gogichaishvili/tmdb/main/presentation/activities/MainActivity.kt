@@ -1,5 +1,7 @@
 package ge.gogichaishvili.tmdb.main.presentation.activities
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
@@ -7,13 +9,13 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.dmoral.toasty.Toasty
 import ge.gogichaishvili.tmdb.R
+import ge.gogichaishvili.tmdb.app.network.setAppLocale
+import ge.gogichaishvili.tmdb.app.tools.SharedPreferenceManager
 import ge.gogichaishvili.tmdb.databinding.ActivityMainBinding
 import ge.gogichaishvili.tmdb.main.presentation.activities.base.BaseActivity
 import ge.gogichaishvili.tmdb.main.presentation.viewmodels.MainViewModel
@@ -25,6 +27,12 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var isFirstStart = true
+
+    override fun attachBaseContext(newBase: Context) {
+        val pref = SharedPreferenceManager(newBase)
+        val locale = pref.getSelectedLanguageCode()
+        super.attachBaseContext(ContextWrapper(newBase.setAppLocale(locale)))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

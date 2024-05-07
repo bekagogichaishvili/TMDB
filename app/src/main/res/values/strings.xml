@@ -16,4 +16,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="all_fields_are_required">All fields are required</string>
+    <string name="guest">Guest</string>
+    <string name="eng">ENG</string>
+    <string name="geo">GEO</string>
 </resources>

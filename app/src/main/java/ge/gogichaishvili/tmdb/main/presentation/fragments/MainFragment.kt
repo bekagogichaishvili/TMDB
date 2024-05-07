@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentActivity
@@ -45,6 +46,14 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().moveTaskToBack(true)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
         mViewModel.getMovies(null)
 
         setupRecyclerView()
@@ -59,9 +68,6 @@ class MainFragment : BaseFragment<MainViewModel>(MainViewModel::class) {
             setOnItemClickListener {
                val detailsFragment = DetailsFragment.newInstance(it.id)
                detailsFragment.show(parentFragmentManager, null)
-
-                //val action = MainFragmentDirections.actionMainFragmentToFavoritesFragment()
-                //findNavController().navigate(action)
             }
 
         }

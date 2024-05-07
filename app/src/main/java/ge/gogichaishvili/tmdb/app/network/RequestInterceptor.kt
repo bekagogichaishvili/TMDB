@@ -1,5 +1,6 @@
 package ge.gogichaishvili.tmdb.app.network
 
+import ge.gogichaishvili.tmdb.cache.UserSession
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.Locale
@@ -8,7 +9,8 @@ class RequestInterceptor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
-        val token = ""
+        val token = UserSession.getAccessToken()
+
         val requestBuilder = chain.request().newBuilder()
 
         if (token != null) {

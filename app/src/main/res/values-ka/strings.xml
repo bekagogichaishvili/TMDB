@@ -16,4 +16,7 @@
     <string name="password">პაროლი</string>
     <string name="login">შესვლა</string>
     <string name="all_fields_are_required">ყველა ველის შევსება აუცილებელია</string>
+    <string name="guest">სტუმარი</string>
+    <string name="eng">ENG</string>
+    <string name="geo">GEO</string>
 </resources>
