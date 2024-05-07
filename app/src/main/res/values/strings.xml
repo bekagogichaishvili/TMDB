@@ -7,4 +7,6 @@
     <string name="add_to_favorite">Add to favorites</string>
     <string name="movie_added">Movie successfully added</string>
     <string name="error">Error occurred</string>
+    <string name="connection_success">Your internet connection restored.</string>
+    <string name="connection_loss">Your internet connection has been lost.</string>
 </resources>
