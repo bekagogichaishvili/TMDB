@@ -9,4 +9,5 @@
     <string name="error">Error occurred</string>
     <string name="connection_success">Your internet connection restored.</string>
     <string name="connection_loss">Your internet connection has been lost.</string>
+    <string name="movie_deleted">Movie successfully deleted</string>
 </resources>

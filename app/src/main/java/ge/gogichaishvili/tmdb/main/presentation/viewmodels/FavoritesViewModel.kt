@@ -1,5 +1,7 @@
 package ge.gogichaishvili.tmdb.main.presentation.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -19,28 +21,26 @@ class FavoritesViewModel(
 ) : BaseViewModel() {
 
     fun getMovies(): Flow<PagingData<FavoriteMovieModel>> {
-        return Pager(PagingConfig(pageSize = 1)) {
-            RoomMoviesPagingSource(getAllMoviesUseCase)
-        }.flow.cachedIn(viewModelScope)
-    }
-
-
-   /* fun getMovies_(): Flow<PagingData<FavoriteMovieModel>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20, // More standard page size
-                enablePlaceholders = true, // Enable placeholders if your UI supports it and you need smoother scrolling
-                maxSize = 100, // Consider setting a maxSize that is some multiple of pageSize
-                initialLoadSize = 40 // Consider setting an initialLoadSize that is typically twice the pageSize
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 100,
+                initialLoadSize = 40
             ),
             pagingSourceFactory = { RoomMoviesPagingSource(getAllMoviesUseCase) }
         ).flow.cachedIn(viewModelScope)
-    }*/
+    }
 
 
-    fun deleteMovie(movie: FavoriteMovieModel) {
+    private val _statusMessage = MutableLiveData<Boolean>()
+    val statusMessage: LiveData<Boolean> = _statusMessage
+
+    fun deleteMovie(id: Long) {
         viewModelScope.launch {
-            deleteMovieUseCase.execute(movie)
+            val success = deleteMovieUseCase.execute(id)
+            _statusMessage.value = success
         }
     }
+
 }

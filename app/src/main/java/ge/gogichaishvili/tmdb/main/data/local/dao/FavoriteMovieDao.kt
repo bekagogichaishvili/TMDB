@@ -14,13 +14,15 @@ interface FavoriteMovieDao {
     @Query("SELECT * FROM $TABLE_NAME ORDER BY id ASC LIMIT :limit OFFSET :offset")
     suspend fun getPagedList(limit: Int, offset: Int): List<FavoriteMovieModel>
 
+    @Query("DELETE FROM $TABLE_NAME WHERE id = :id")
+    suspend fun deleteMovieById(id: Long): Int
+
+    
+
 
 
     @Query("SELECT * FROM $TABLE_NAME ORDER BY id DESC")
     suspend fun getMovieList(): List<FavoriteMovieModel>?
-
-    //@Query("SELECT * FROM $TABLE_NAME ORDER BY id ASC")
-    //suspend fun getAllMovies(): LiveData<List<FavoriteMovieModel>>
 
     @Query("SELECT * FROM $TABLE_NAME WHERE $TABLE_NAME.id = :id")
     suspend fun getMovie(id: String): FavoriteMovieModel?
@@ -34,9 +36,6 @@ interface FavoriteMovieDao {
 
     @Delete
     suspend fun delete(model: FavoriteMovieModel)
-
-    @Query("DELETE FROM $TABLE_NAME WHERE id = :id")
-    suspend fun deleteMovie(id: String)
 
     @Update
     suspend fun update(model: FavoriteMovieModel)

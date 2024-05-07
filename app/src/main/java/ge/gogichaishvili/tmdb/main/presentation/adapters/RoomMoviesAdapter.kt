@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +12,6 @@ import com.bumptech.glide.Glide
 import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.databinding.LayoutRoomItemBinding
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class RoomMoviesAdapter :
     PagingDataAdapter<FavoriteMovieModel, RoomMoviesAdapter.ViewHolder>(differCallback) {
@@ -38,6 +35,7 @@ class RoomMoviesAdapter :
         private val context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("NotifyDataSetChanged")
         fun bind(item: FavoriteMovieModel) {
             binding.tvTitle.text = item.title
             binding.tvInfo.text = item.overview
@@ -54,6 +52,11 @@ class RoomMoviesAdapter :
                     click(item)
                 }
             }
+            binding.ibDelete.setOnClickListener {
+                onDeleteClickListener?.let { click ->
+                    click(item)
+                }
+            }
         }
     }
 
@@ -63,12 +66,9 @@ class RoomMoviesAdapter :
         onItemClickListener = listener
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    suspend fun clear() {
-        withContext(Dispatchers.Main) {
-            submitData(PagingData.empty())
-            notifyDataSetChanged()
-        }
+    private var onDeleteClickListener: ((FavoriteMovieModel) -> Unit)? = null
+    fun setOnDeleteClickListener(listener: (FavoriteMovieModel) -> Unit) {
+        onDeleteClickListener = listener
     }
 
     companion object {

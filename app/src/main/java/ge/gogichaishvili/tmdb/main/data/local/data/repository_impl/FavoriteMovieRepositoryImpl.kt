@@ -16,8 +16,13 @@ class FavoriteMovieRepositoryImpl(private val favoriteMovieDao: FavoriteMovieDao
         }
     }
 
-    override suspend fun deleteMovie(model: FavoriteMovieModel) {
-        favoriteMovieDao.delete(model)
+    override suspend fun deleteMovie(id: Long): Boolean {
+        return try {
+            val result = favoriteMovieDao.deleteMovieById(id)
+            result > 0
+        } catch (e: Exception) {
+            false
+        }
     }
 
     override suspend fun getAllMovies(limit: Int, offset: Int): List<FavoriteMovieModel> {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,8 +13,12 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import es.dmoral.toasty.Toasty
 import ge.gogichaishvili.tmdb.R
+import ge.gogichaishvili.tmdb.app.network.ApiEndpoints
+import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.databinding.FragmentFavoritesBinding
 import ge.gogichaishvili.tmdb.main.data.network.paging.LoaderStateAdapter
 import ge.gogichaishvili.tmdb.main.presentation.adapters.RoomMoviesAdapter
@@ -45,12 +50,16 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>(FavoritesViewModel::c
         setupRecyclerView()
         observeMovies()
         handleLoadStates()
+
     }
 
     private fun setupRecyclerView() {
         roomMoviesAdapter = RoomMoviesAdapter().apply {
             setOnItemClickListener {
 
+            }
+            setOnDeleteClickListener {
+                mViewModel.deleteMovie(it.id.toLong())
             }
         }
         binding.rvItemsRecycler.apply {
@@ -92,6 +101,23 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>(FavoritesViewModel::c
                 ).show()
             }
         }
+    }
+
+
+    override fun bindObservers() {
+
+        mViewModel.statusMessage.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                Toasty.success(
+                    requireContext(), R.string.movie_deleted, Toast.LENGTH_SHORT, true
+                ).show()
+            } else {
+                Toasty.error(requireContext(), R.string.error, Toast.LENGTH_SHORT, true)
+                    .show()
+            }
+
+        }
+
     }
 
     override fun onDestroyView() {
