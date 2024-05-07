@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import ge.gogichaishvili.tmdb.R
@@ -49,18 +50,16 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>(FavoritesViewModel::c
     private fun setupRecyclerView() {
         roomMoviesAdapter = RoomMoviesAdapter().apply {
             setOnItemClickListener {
-                val detailsFragment = DetailsFragment.newInstance(it.id)
-                detailsFragment.show(parentFragmentManager, null)
-            }
 
+            }
         }
         binding.rvItemsRecycler.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = roomMoviesAdapter.withLoadStateHeaderAndFooter(
                 header = LoaderStateAdapter(),
                 footer = LoaderStateAdapter()
             )
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
         }
     }
 

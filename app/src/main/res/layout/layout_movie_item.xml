@@ -54,7 +54,7 @@
         android:ellipsize="end"
         android:fontFamily="@font/bpg"
         android:lines="4"
-        android:maxLines="3"
+        android:maxLines="4"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"

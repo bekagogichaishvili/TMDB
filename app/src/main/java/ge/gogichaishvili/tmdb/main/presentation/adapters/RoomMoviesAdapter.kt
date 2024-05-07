@@ -2,12 +2,15 @@ package ge.gogichaishvili.tmdb.main.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.databinding.LayoutRoomItemBinding
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 import kotlinx.coroutines.Dispatchers
@@ -36,13 +39,15 @@ class RoomMoviesAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: FavoriteMovieModel) {
-            binding.textView.text = item.title
-
-            /*  Glide.with(context)
-                  .load(ApiEndpoints.IMAGE_PATH + item.posterPath)
-                  .error(R.drawable.no_poster)
-                  .centerCrop()
-                  .into(binding.ivPoster)*/
+            binding.tvTitle.text = item.title
+            binding.tvInfo.text = item.overview
+            val imageData: ByteArray = item.image
+            val bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.size)
+            Glide.with(context)
+                .load(bitmap)
+                .error(R.drawable.no_poster)
+                .centerCrop()
+                .into(binding.ivPoster)
 
             binding.root.setOnClickListener {
                 onItemClickListener?.let { click ->

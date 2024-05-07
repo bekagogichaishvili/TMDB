@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 import ge.gogichaishvili.tmdb.main.domain.local.usecase.GetAllMoviesUseCase
-import kotlinx.coroutines.delay
 
 private const val STARTING_PAGE_INDEX = 0
 
@@ -18,8 +17,6 @@ class RoomMoviesPagingSource(
         val offset = currentPage * pageSize
 
         return try {
-
-            if (currentPage != STARTING_PAGE_INDEX) delay(1000)
 
             val movies = getAllMoviesUseCase.execute(pageSize, offset)
             val nextKey = if (movies.size < pageSize) null else currentPage + 1
