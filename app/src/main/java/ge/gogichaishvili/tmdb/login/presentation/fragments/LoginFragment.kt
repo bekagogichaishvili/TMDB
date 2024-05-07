@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.app.tools.SharedPreferenceManager
+import ge.gogichaishvili.tmdb.app.tools.Utils
 import ge.gogichaishvili.tmdb.databinding.FragmentLoginBinding
 import ge.gogichaishvili.tmdb.login.presentation.viewmodels.LoginViewModel
 import ge.gogichaishvili.tmdb.main.presentation.activities.MainActivity
@@ -111,7 +114,13 @@ class LoginFragment : BaseFragment<LoginViewModel>(LoginViewModel::class) {
         mViewModel.viewStateLiveData.observe(viewLifecycleOwner) {
             if (!it.isValid) {
                 val message = String.format(resources.getString(it.errorMessageRes))
+                Utils.playAlertSound(requireContext())
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                val shakeAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+                binding.apply {
+                    etUsername.startAnimation(shakeAnimation)
+                    etPassword.startAnimation(shakeAnimation)
+                }
             }
         }
     }

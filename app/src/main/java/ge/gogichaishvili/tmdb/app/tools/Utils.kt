@@ -1,10 +1,13 @@
 package ge.gogichaishvili.tmdb.app.tools
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.media.MediaPlayer
 import android.util.Base64
 import android.widget.ImageView
+import ge.gogichaishvili.tmdb.R
 import java.io.ByteArrayOutputStream
 
 object Utils {
@@ -59,6 +62,10 @@ object Utils {
         return null
     }
 
+    fun playAlertSound(context: Context) {
+        val mediaPlayer = MediaPlayer.create(context, R.raw.alert)
+        mediaPlayer?.start()
+    }
 }
 
 
