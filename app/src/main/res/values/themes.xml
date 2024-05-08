@@ -41,6 +41,7 @@
         <item name="postSplashScreenTheme">@style/Theme.TMDB</item>
     </style>
 
+
     <!-- DialogFragment style -->
     <style name="myDialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>

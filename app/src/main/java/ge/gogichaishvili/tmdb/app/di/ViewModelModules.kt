@@ -19,13 +19,12 @@ object ViewModelModules {
         }
 
         viewModel {
-            FavoritesViewModel(getAllMoviesUseCase = get(), deleteMovieUseCase = get() )
+            FavoritesViewModel(getAllMoviesUseCase = get(), deleteMovieUseCase = get())
         }
 
         viewModel {
-            LoginViewModel(authUseCase = get(), loginUseCase = get() )
+            LoginViewModel(authUseCase = get(), loginUseCase = get())
         }
-
 
     }
 }

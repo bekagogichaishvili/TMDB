@@ -35,8 +35,18 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        val splashScreen = installSplashScreen()
+        splashScreen.setOnExitAnimationListener { splashScreenViewProvider ->
+            splashScreenViewProvider.iconView.animate()
+                .alpha(0f)
+                .setDuration(2000)
+                .withEndAction {
+                    splashScreenViewProvider.remove()
+                }
+                .start()
+        }
 
         requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)

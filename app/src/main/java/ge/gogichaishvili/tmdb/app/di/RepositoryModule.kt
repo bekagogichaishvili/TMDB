@@ -21,23 +21,23 @@ object RepositoryModule {
         single { SharedPreferenceManager(context = androidApplication()) }
 
         single {
-            MovieRepositoryImpl (movieServiceApi = get()) as MovieRepository
+            MovieRepositoryImpl(movieServiceApi = get()) as MovieRepository
         }
 
         single {
-            MovieDetailsRepositoryImpl (movieDetailsServiceApi = get()) as MovieDetailsRepository
+            MovieDetailsRepositoryImpl(movieDetailsServiceApi = get()) as MovieDetailsRepository
         }
 
         single {
-            FavoriteMovieRepositoryImpl (favoriteMovieDao = get()) as FavoriteMovieRepository
+            FavoriteMovieRepositoryImpl(favoriteMovieDao = get()) as FavoriteMovieRepository
         }
 
         single {
-            AuthRepositoryImpl (authServiceApi = get()) as AuthRepository
+            AuthRepositoryImpl(authServiceApi = get()) as AuthRepository
         }
 
         single {
-            LoginRepositoryImpl (loginServiceApi = get()) as LoginRepository
+            LoginRepositoryImpl(loginServiceApi = get()) as LoginRepository
         }
 
     }

@@ -1,7 +1,11 @@
 package ge.gogichaishvili.tmdb.main.data.local.dao
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import ge.gogichaishvili.tmdb.app.constants.Constants.TABLE_NAME
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
 
@@ -16,13 +20,6 @@ interface FavoriteMovieDao {
 
     @Query("DELETE FROM $TABLE_NAME WHERE id = :id")
     suspend fun deleteMovieById(id: Long): Int
-
-    
-
-
-
-    @Query("SELECT * FROM $TABLE_NAME ORDER BY id DESC")
-    suspend fun getMovieList(): List<FavoriteMovieModel>?
 
     @Query("SELECT * FROM $TABLE_NAME WHERE $TABLE_NAME.id = :id")
     suspend fun getMovie(id: String): FavoriteMovieModel?
@@ -39,8 +36,5 @@ interface FavoriteMovieDao {
 
     @Update
     suspend fun update(model: FavoriteMovieModel)
-
-    @Query("SELECT * FROM $TABLE_NAME LIMIT :pageSize OFFSET :pageIndex")
-    suspend fun getMoviePage(pageSize: Int, pageIndex: Int): List<FavoriteMovieModel>?
 
 }

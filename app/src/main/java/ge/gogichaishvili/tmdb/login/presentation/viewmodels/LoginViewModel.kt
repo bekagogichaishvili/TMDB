@@ -1,7 +1,6 @@
 package ge.gogichaishvili.tmdb.login.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.app.constants.Constants

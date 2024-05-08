@@ -1,7 +1,6 @@
 package ge.gogichaishvili.tmdb.main.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ge.gogichaishvili.tmdb.app.network.Resource
 import ge.gogichaishvili.tmdb.app.tools.SingleLiveEvent
@@ -50,7 +49,6 @@ class DetailsViewModel(
             _statusMessage.value = success
         }
     }
-
 
 }
 

@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +12,6 @@ import com.bumptech.glide.Glide
 import ge.gogichaishvili.tmdb.R
 import ge.gogichaishvili.tmdb.databinding.LayoutRoomItemBinding
 import ge.gogichaishvili.tmdb.main.data.local.entities.FavoriteMovieModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class RoomMoviesAdapter :
     PagingDataAdapter<FavoriteMovieModel, RoomMoviesAdapter.ViewHolder>(differCallback) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TMDB</string>
-    <string name="not_found">არ არის ნაპოვნი</string>
+    <string name="not_found">მონაცემები არ არის ნაპოვნი</string>
     <string name="search">ძებნა</string>
     <string name="add_to_favorite">Რჩეულებში დამატება</string>
     <string name="movie_added">ფილმი წარმატებით დაემატა</string>

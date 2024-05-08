@@ -24,6 +24,8 @@ class LoginFragment : BaseFragment<LoginViewModel>(LoginViewModel::class) {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    //private val args: DetailsFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,7 +62,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(LoginViewModel::class) {
 
     }
 
-    private fun restart () {
+    private fun restart() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
     }
